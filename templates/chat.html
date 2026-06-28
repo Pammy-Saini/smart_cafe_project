@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Drink Portal | Cozy Cafe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(rgba(20, 15, 15, 0.93), rgba(20, 15, 15, 0.96)), url('https://images.unsplash.com/photo-1563245372-f21724e3856d?q=80&w=1600') no-repeat center center fixed;
+            background-size: cover;
+            color: #e4e4e7;
+        }
+        .chat-container { height: 60vh; }
+        .neon-glow { text-shadow: 0 0 10px #f472b6, 0 0 20px #db2777; }
+    </style>
+</head>
+<body class="font-sans flex flex-col min-h-screen">
+<nav class="p-5 flex justify-between items-center border-b border-stone-850 max-w-4xl w-full mx-auto">
+    <h1 class="text-xl font-black text-[#f472b6] neon-glow">🤖 AI DRINK PORTAL</h1>
+    <a href="/" class="text-xs bg-black text-[#f472b6] border border-[#f472b6]/40 hover:bg-[#831843] hover:text-white px-4 py-2 rounded-full font-bold transition">Home</a>
+</nav>
+<main class="flex-grow max-w-4xl w-full mx-auto p-4 flex flex-col justify-between">
+    <div id="chat-window" class="chat-container bg-stone-900/90 border border-stone-850 rounded-2xl p-4 overflow-y-auto space-y-4">
+        <div class="flex items-start gap-3">
+            <div class="bg-[#db2777] text-white p-2 rounded-full text-xs font-bold">AI</div>
+            <div class="bg-stone-950 p-3 rounded-r-xl rounded-bl-xl max-w-xs text-sm border border-stone-800">
+                Hey! What's the vibe today? Cold, sweet, hot ya strong? 🍹
+            </div>
+        </div>
+    </div>
+    <div class="mt-4 flex gap-2">
+        <input type="text" id="user-input"
+               placeholder="Type here..."
+               class="flex-grow bg-stone-950 border border-stone-800 rounded-xl p-4 text-white focus:outline-none focus:border-[#f472b6]">
+        <!-- Matte Black Button -->
+        <button onclick="sendMessage()"
+                class="bg-black text-[#f472b6] border border-[#f472b6]/40 px-6 py-4 rounded-xl font-bold hover:bg-[#831843] hover:text-white transition">
+            Send
+        </button>
+    </div>
+</main>
+<script>
+function sendMessage() {
+    const inputField = document.getElementById('user-input');
+    const message = inputField.value.trim();
+    if (!message) return;
+    const chatWindow = document.getElementById('chat-window');
+    // User message
+    chatWindow.innerHTML += `
+        <div class="flex items-start gap-3 justify-end">
+            <div class="bg-black text-[#f472b6] p-3 rounded-l-xl rounded-br-xl max-w-xs text-sm border border-[#f472b6]/30">
+                ${message}
+            </div>
+        </div>
+    `;
+    inputField.value = '';
+    // Loading message
+    chatWindow.innerHTML += `
+        <div id="loading-msg" class="text-stone-500 text-sm">AI is typing...</div>
+    `;
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+    fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: message })
+    })
+    .then(res => res.json())
+    .then(data => {
+    document.getElementById('loading-msg').remove();
+    let imageHtml = "";
+    if (data.image) {
+        imageHtml = `
+            <img src="${data.image}"
+                 class="w-48 mt-3 rounded-xl border border-[#f472b6]/30 shadow-lg">
+        `;
+    }
+    chatWindow.innerHTML += `
+        <div class="flex items-start gap-3">
+            <div class="bg-[#db2777] text-white p-2 rounded-full text-xs font-bold">AI</div>
+            <div class="bg-stone-950 p-3 rounded-r-xl rounded-bl-xl max-w-sm text-sm whitespace-pre-line border border-stone-850">
+                ${data.response}
+                ${imageHtml}
+            </div>
+        </div>
+    `;
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+})
+    .catch(err => {
+        console.error(err);
+    });
+}
+document.getElementById('user-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') sendMessage();
+});
+</script>
+</body>
+</html>

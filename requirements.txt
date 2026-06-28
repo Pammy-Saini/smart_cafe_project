@@ -1,0 +1,5 @@
+Flask
+Flask-MySQLdb
+google-generativeai
+pandas
+scikit-learn

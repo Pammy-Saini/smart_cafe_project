@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Draw Winners | Smart Cafe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(rgba(18, 14, 11, 0.94), rgba(18, 14, 11, 0.96)), url('https://images.unsplash.com/photo-1498804103079-a6351b050096?q=80&w=1600') no-repeat center center fixed;
+            background-size: cover;
+            color: #e4e4e7;
+        }
+        .neon-glow { text-shadow: 0 0 10px #d4a373, 0 0 20px #a1724e; }
+    </style>
+</head>
+<body class="font-sans flex flex-col items-center justify-center min-h-screen p-6">
+    <div class="max-w-xl w-full bg-stone-900/90 border border-stone-850 p-8 rounded-3xl text-center shadow-2xl">
+        <span class="text-4xl">🎉</span>
+        <h1 class="text-3xl font-black text-[#d4a373] neon-glow mt-4 uppercase">Weekly Lucky Couple Draw</h1>
+        <p class="text-gray-400 text-xs mt-2 max-w-sm mx-auto">
+            These lucky couples booked a table for 2 and won a free Iced Vanilla Latte on their next visit!
+        </p>
+        <!-- Winners Grid -->
+        <div class="mt-8 space-y-4">
+            {% if winners %}
+                {% for w in winners %}
+                <div class="bg-stone-950 p-5 rounded-2xl border border-stone-900 flex justify-between items-center text-left">
+                    <div>
+                        <p class="text-white font-extrabold text-base">✨ {{ w[0] }}</p>
+                        <p class="text-gray-500 text-xs mt-1">Booked on: {{ w[1] }}</p>
+                    </div>
+                    <span class="bg-[#d4a373]/10 text-[#d4a373] font-mono text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-[#d4a373]/20">
+                        FREE LATTE ☕
+                    </span>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="py-8 bg-stone-950 rounded-2xl border border-stone-900 italic text-gray-500 text-xs">
+                    No couples found in booking records yet. Book a table for 2 guests to participate!
+                </div>
+            {% endif %}
+        </div>
+        <!-- Controls -->
+        <div class="mt-8 pt-6 border-t border-stone-850 flex justify-between items-center text-xs">
+            <a href="/" class="text-gray-400 hover:text-white transition">← Back to Home</a>
+            <a href="/#booking" class="bg-black text-white border border-[#b5835a]/50 hover:bg-[#3E2723] hover:border-[#b5835a] font-bold px-5 py-2.5 rounded-full transition">
+                Book for 2 Guests 👥
+            </a>
+        </div>
+    </div>
+</body>
+</html>

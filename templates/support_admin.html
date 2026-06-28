@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Tickets Inbox | Smart Cafe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(rgba(18, 14, 11, 0.94), rgba(18, 14, 11, 0.96)), url('https://images.unsplash.com/photo-1498804103079-a6351b050096?q=80&w=1600') no-repeat center center fixed;
+            background-size: cover;
+            color: #e4e4e7;
+        }
+        .neon-glow { text-shadow: 0 0 10px #d4a373, 0 0 20px #a1724e; }
+    </style>
+</head>
+<body class="font-sans p-6">
+    <nav class="max-w-4xl mx-auto flex justify-between items-center py-6 border-b border-stone-850 mb-10 bg-stone-900/40 px-6 rounded-2xl">
+        <div>
+            <h1 class="text-2xl font-black text-[#d4a373] neon-glow">📬 SUPPORT TICKETS</h1>
+            <p class="text-[10px] text-gray-500 uppercase tracking-widest font-mono mt-0.5">Cafe Inbox Manager</p>
+        </div>
+        <a href="/dashboard" class="text-xs bg-black text-white border border-[#b5835a]/50 hover:bg-[#3E2723] hover:border-[#b5835a] px-4 py-2 rounded-full transition">
+            ← Dashboard
+        </a>
+    </nav>
+    <div class="max-w-4xl mx-auto space-y-4">
+        {% if tickets %}
+            {% for t in tickets %}
+            <div class="bg-stone-900/90 border border-stone-850 p-6 rounded-3xl space-y-3">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="text-base font-extrabold text-white">{{ t[1] }}</h3>
+                        <p class="text-xs text-[#d4a373] mt-1">📞 Phone/Email: {{ t[2] }}</p>
+                    </div>
+                    <span class="text-[10px] text-gray-500 font-mono">{{ t[4] }}</span>
+                </div>
+                <div class="bg-stone-950 p-4 rounded-2xl border border-stone-850 text-xs text-gray-300 leading-relaxed">
+                    {{ t[3] }}
+                </div>
+                <div class="flex justify-end pt-2">
+                    <a href="/admin/delete-ticket/{{ t[0] }}" class="bg-black text-[#d4a373] border border-[#d4a373]/50 hover:bg-[#3E2723] hover:text-white px-4 py-1.5 rounded-lg text-xs font-bold uppercase transition">
+                        Resolve ✔
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="text-center py-16 bg-stone-900/50 border border-stone-850 rounded-3xl">
+                <p class="text-gray-400 text-sm">No customer support tickets recorded in database. ☕</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

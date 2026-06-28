@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aesthetic Menu | Cozy Cafe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(rgba(20, 15, 15, 0.93), rgba(20, 15, 15, 0.96)), url('https://images.unsplash.com/photo-1563245372-f21724e3856d?q=80&w=1600') no-repeat center center fixed;
+            background-size: cover;
+            color: #e4e4e7;
+        }
+        .neon-glow { text-shadow: 0 0 10px #f472b6, 0 0 20px #db2777; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #120e0b; }
+        ::-webkit-scrollbar-thumb { background: #831843; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #f472b6; }
+    </style>
+</head>
+<body class="font-sans p-6">
+    <nav class="max-w-6xl mx-auto flex justify-between items-center py-6 border-b border-stone-850 mb-10">
+        <h1 class="text-2xl font-black text-[#f472b6] neon-glow">📜 COZY MENU</h1>
+        <div class="flex space-x-4 items-center">
+            <a href="/" class="text-gray-400 hover:text-white transition text-sm">Home</a>
+            <a href="/cart" class="bg-black text-[#f472b6] border border-[#f472b6]/40 px-4 py-2 rounded-full font-bold hover:bg-[#831843] hover:text-white transition text-xs">Cart 🛒</a>
+            <a href="/dashboard" class="bg-black text-[#f472b6] border border-[#f472b6]/40 px-4 py-2 rounded-full font-bold hover:bg-[#831843] hover:text-white transition text-xs">Dashboard</a>
+        </div>
+    </nav>
+    <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% for item in menu %}
+            <div class="bg-stone-900/90 border border-stone-850 rounded-3xl overflow-hidden hover:border-[#f472b6]/40 transition duration-300 flex flex-col justify-between">
+                <div class="w-full h-56 bg-stone-950">
+                    {% if item[1] == "Mint Mojito" %} 
+                        <img src="https://images.unsplash.com/photo-1551751299-1b51cab2694c?w=500" class="w-full h-full object-cover">
+                    {% elif item[1] == "Hot Americano" %} 
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500" class="w-full h-full object-cover">
+                    {% elif item[1] == "Chocolate Frappe" %} 
+                        <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500" class="w-full h-full object-cover">
+                    {% elif item[1] == "Iced Vanilla Latte" %} 
+                        <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=500" class="w-full h-full object-cover">
+                    {% elif item[4] and (item[4].startswith('http://') or item[4].startswith('https://')) %}
+                        <img src="{{ item[4] }}" alt="{{ item[1] }}" class="w-full h-full object-cover">
+                    {% elif item[4] %}
+                        <img src="{{ url_for('static', filename=item[4]) }}" alt="{{ item[1] }}" class="w-full h-full object-cover">
+                    {% else %}
+                        <div class="w-full h-full bg-stone-900 flex items-center justify-center text-xs text-gray-500 font-mono">NO IMAGE</div>
+                    {% endif %}
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-[#f472b6] uppercase bg-[#f472b6]/10 px-2 py-1 rounded">{{ item[2] }}</span>
+                        <h3 class="text-xl font-extrabold text-white mt-3">{{ item[1] }}</h3>
+                        <p class="text-2xl font-black text-[#f472b6] mt-2">₹{{ item[3] }}</p>
+                    </div>
+                    <form action="/add-to-cart" method="POST" class="mt-4">
+                        <input type="hidden" name="item_name" value="{{ item[1] }}">
+                        <input type="hidden" name="price" value="{{ item[3] }}">
+                        {% if item[1] == "Mint Mojito" %}
+                            <input type="hidden" name="image" value="https://images.unsplash.com/photo-1551751299-1b51cab2694c?w=500">
+                        {% elif item[1] == "Hot Americano" %}
+                            <input type="hidden" name="image" value="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500">
+                        {% elif item[1] == "Chocolate Frappe" %}
+                            <input type="hidden" name="image" value="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500">
+                        {% elif item[1] == "Iced Vanilla Latte" %}
+                            <input type="hidden" name="image" value="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=500">
+                        {% else %}
+                            <input type="hidden" name="image" value="{{ item[4] }}">
+                        {% endif %}
+                        <button type="submit"
+                            class="w-full bg-black text-[#f472b6] border border-[#f472b6]/45 hover:bg-[#831843] hover:text-white py-2.5 rounded-xl font-bold transition duration-200">
+                            Add to Cart 🛒
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- Chat Bot Trigger and Box -->
+    <div id="vibe-container" class="fixed bottom-6 right-6 z-50">
+        <div id="chat-box" class="hidden w-80 h-[420px] bg-stone-900 border border-[#f472b6]/40 rounded-3xl shadow-2xl flex flex-col mb-4 overflow-hidden">
+            <div class="p-4 bg-[#831843]/60 text-white font-bold text-center border-b border-stone-850 text-sm">VibeCheck AI 🌸</div>
+            <div id="chat-history" class="flex-1 p-4 overflow-y-auto text-xs space-y-2 text-gray-300">
+                <div class="bg-stone-950 p-2.5 rounded-xl border border-stone-850">
+                    <p>Hey! Kaise mood mein ho? Batao, kuch suggest karun? ✨</p>
+                </div>
+            </div>
+            <div class="p-3 border-t border-stone-850 bg-stone-950 flex">
+                <input id="user-input" type="text" placeholder="Type here..." 
+                       class="flex-1 bg-transparent outline-none text-white text-xs p-2" onkeydown="if(event.key === 'Enter') sendVibe()">
+                <button onclick="sendVibe()" class="text-[#f472b6] font-bold px-2 text-sm hover:text-white">➔</button>
+            </div>
+        </div>
+        <button onclick="document.getElementById('chat-box').classList.toggle('hidden')" class="bg-black text-[#f472b6] border border-[#f472b6]/40 hover:bg-[#831843] hover:text-white px-6 py-3 rounded-full font-black shadow-lg transition">
+            ✨ VibeCheck
+        </button>
+    </div>
+    <script>
+        async function sendVibe() {
+            const input = document.getElementById('user-input');
+            const history = document.getElementById('chat-history');
+            const msg = input.value.trim();
+            if (!msg) return;
+            // Render customer bubble
+            history.innerHTML += `
+                <div class="flex justify-end">
+                    <div class="bg-black text-[#f472b6] border border-[#f472b6]/35 p-2.5 rounded-xl font-semibold max-w-[80%]">
+                        <p>${msg}</p>
+                    </div>
+                </div>
+            `;
+            input.value = '';
+            history.scrollTop = history.scrollHeight;
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({message: msg})
+                });
+                const data = await res.json();
+                
+                let botHTML = `
+                    <div class="bg-stone-950 p-2.5 rounded-xl border border-stone-850 max-w-[85%] space-y-2">
+                        <p>${data.response || "Mera server refresh ho raha hai!"}</p>
+                `;
+                
+                // Show suggested drink picture directly if returned
+                if (data.image) {
+                    botHTML += `
+                        <div class="mt-2 rounded-lg overflow-hidden border border-[#f472b6]/25">
+                            <img src="${data.image}" class="w-full h-24 object-cover">
+                        </div>
+                    `;
+                }
+                
+                botHTML += `</div>`;
+                
+                history.innerHTML += botHTML;
+                history.scrollTop = history.scrollHeight;
+            } catch (err) {
+                history.innerHTML += `
+                    <div class="bg-rose-950/20 border border-rose-500/20 p-2 text-rose-400 text-[10px] rounded-lg">
+                        <p>Vibes match mismatch: Timeout.</p>
+                    </div>
+                `;
+                history.scrollTop = history.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>

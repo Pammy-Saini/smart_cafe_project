@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect & Vibe | Smart Cafe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(rgba(18, 14, 11, 0.94), rgba(18, 14, 11, 0.96)), url('https://images.unsplash.com/photo-1498804103079-a6351b050096?q=80&w=1600') no-repeat center center fixed;
+            background-size: cover;
+            color: #e4e4e7;
+        }
+        .neon-glow-cyan { text-shadow: 0 0 10px #d4a373; }
+        .neon-border-pink { border-color: rgba(220, 38, 38, 0.4); box-shadow: 0 0 15px rgba(220, 38, 38, 0.1); }
+    </style>
+</head>
+<body class="font-sans p-4 md:p-8">
+    <nav class="max-w-6xl mx-auto flex justify-between items-center py-6 border-b border-stone-800 mb-12">
+        <h1 class="text-2xl font-black text-[#d4a373] neon-glow-cyan">⚙️ CAFE HUB</h1>
+        <div class="flex gap-4">
+            <a href="/" class="text-sm text-gray-400 hover:text-white transition">Home</a>
+            <a href="/menu" class="text-sm text-gray-400 hover:text-white transition">Menu</a>
+            <a href="/chat" class="text-sm font-bold text-amber-400 hover:text-amber-300 transition">AI Live Chat 🤖</a>
+        </div>
+    </nav>
+    <div class="max-w-6xl mx-auto space-y-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="md:col-span-2 bg-[#1e1b18]/80 border border-stone-850 p-8 rounded-3xl flex flex-col justify-between">
+                <div>
+                    <span class="text-xs font-mono tracking-widest text-[#d4a373] uppercase">Our Story</span>
+                    <h2 class="text-3xl font-black text-white mt-2 mb-4">About Smart Cafe</h2>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Welcome to India's first completely automated tech-cafe experience. We blend premium micro-roasted specialty coffee with cutting-edge artificial intelligence. Whether you are coding your next startup, fine-tuning neural networks, or just matching vibes on a weekend date, our smart ecosystem adapts to your mood. No waiters, no queues—just pure automated syntax and fuel.
+                    </p>
+                </div>
+                <div class="mt-6 flex gap-4 text-xs font-mono text-stone-500">
+                    <div>⚡ High-Speed Wi-Fi</div>
+                    <div>☕ Premium Beans</div>
+                    <div>🤖 AI Order Pipeline</div>
+                </div>
+            </div>
+            <div class="bg-gradient-to-br from-stone-900 to-stone-950 border border-[#b5835a]/30 p-8 rounded-3xl text-center flex flex-col items-center justify-center">
+                <span class="text-xs font-bold text-rose-400 uppercase tracking-widest mb-3">📸 Catch the Vibe</span>
+                <h3 class="text-xl font-extrabold text-white mb-4">Follow Us on Insta</h3>
+                
+                <div class="bg-white p-3 rounded-2xl inline-block shadow-lg">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://instagram.com" 
+                         alt="Instagram QR Code" class="w-36 h-36">
+                </div>
+                
+                <p class="text-[11px] text-gray-500 mt-4">Scan the QR code to check our daily reels & student discount coupons.</p>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <div class="bg-[#1e1b18]/80 p-8 rounded-3xl border border-stone-850">
+                <h3 class="text-xl font-black text-white mb-2">🔐 Customer Sign In</h3>
+                <p class="text-xs text-gray-400 mb-6">Log in to track your loyalty coffee points and active table bookings.</p>
+                
+                <form action="/auth-signin" method="POST" class="space-y-4">
+                    <div>
+                        <label class="block text-xs text-stone-400 mb-1">Registered Email</label>
+                        <input type="email" name="user_email" placeholder="you@example.com" class="w-full bg-stone-950 p-3 rounded-xl border border-stone-850 text-white focus:outline-none focus:border-[#d4a373] text-sm" required>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Password</label>
+                        <input type="password" name="user_pass" placeholder="••••••••" class="w-full bg-stone-950 p-3 rounded-xl border border-stone-850 text-white focus:outline-none focus:border-[#d4a373] text-sm" required>
+                    </div>
+                    <!-- Matte Black Button -->
+                    <button type="submit" class="w-full bg-black text-white border border-[#b5835a]/50 hover:bg-[#3E2723] hover:border-[#b5835a] p-3 rounded-xl font-bold transition text-sm uppercase tracking-wider">
+                        Access Account
+                    </button>
+                </form>
+            </div>
+            <div class="bg-[#1e1b18]/80 p-8 rounded-3xl border border-stone-850">
+                <h3 class="text-xl font-black text-white mb-2">📬 Ping Customer Care</h3>
+                <p class="text-xs text-gray-400 mb-6">Have issues with pricing or corporate booking? Drop a message instantly.</p>
+                
+                <form action="/submit-contact" method="POST" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs text-stone-400 mb-1">Your Name</label>
+                            <input type="text" name="c_name" placeholder="Alex" class="w-full bg-stone-950 p-3 rounded-xl border border-stone-850 text-white focus:outline-none focus:border-[#d4a373] text-sm" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-stone-400 mb-1">Phone Number</label>
+                            <input type="text" name="c_phone" placeholder="+91..." class="w-full bg-stone-950 p-3 rounded-xl border border-stone-850 text-white focus:outline-none focus:border-[#d4a373] text-sm" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-stone-400 mb-1">Message / Suggestion</label>
+                        <textarea name="c_message" rows="2" placeholder="Write your feedback here..." class="w-full bg-stone-950 p-3 rounded-xl border border-stone-850 text-white focus:outline-none focus:border-[#d4a373] text-sm" required></textarea>
+                    </div>
+                    <!-- Matte Black Button -->
+                    <button type="submit" class="w-full bg-black text-white border border-[#b5835a]/50 hover:bg-[#3E2723] p-3 rounded-xl font-bold transition text-sm">
+                        Submit Ticket
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

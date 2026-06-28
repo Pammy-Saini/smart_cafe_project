@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cozy Cafe | Next-Gen AI Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(rgba(28, 18, 22, 0.93), rgba(28, 18, 22, 0.95)), url('https://images.unsplash.com/photo-1563245372-f21724e3856d?q=80&w=1600') no-repeat center center fixed;
+            background-size: cover;
+            color: #f4f4f5;
+        }
+        .neon-glow { text-shadow: 0 0 10px #f472b6, 0 0 20px #db2777; }
+        .neon-border-pink { border-color: rgba(219, 39, 119, 0.4); box-shadow: 0 0 15px rgba(219, 39, 119, 0.1); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1a1216; }
+        ::-webkit-scrollbar-thumb { background: #831843; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #f472b6; }
+        .menu-img{
+            width:100%;
+            height:160px;
+            object-fit:cover;
+            border-radius:12px;
+            display:block;
+        }
+    </style>
+</head>
+<body class="font-sans">
+    
+    <!-- Navbar -->
+    <nav class="p-5 flex justify-between items-center border-b border-[#831843]/40 max-w-6xl mx-auto sticky top-0 bg-[#1a1216]/95 backdrop-blur-md z-50">
+        <h1 class="text-2xl font-black text-[#f472b6] neon-glow">⚡ COZY CAFE</h1>
+        <div class="space-x-6 flex items-center">
+            <a href="#mood-section" class="text-gray-300 hover:text-[#f472b6] transition">Mood Matcher</a>
+            <a href="#menu-search-section" class="text-gray-300 hover:text-[#f472b6] transition">Instant Menu</a>
+            <a href="#booking" class="text-gray-300 hover:text-[#f472b6] transition">Book Slot</a>
+            <a href="#track-booking" class="text-gray-300 hover:text-[#f472b6] transition text-[#f472b6] font-medium">Track Slots</a>
+            <a href="#vibe-wall" class="text-gray-300 hover:text-[#f472b6] transition">Vibe Wall</a>
+            <a href="#music-queue" class="text-gray-300 hover:text-[#f472b6] transition">Music DJ</a>
+            <a href="/chat" class="text-gray-300 hover:text-[#f472b6] transition">AI Chat</a>
+            <a href="/signin" class="text-gray-300 hover:text-[#f472b6] transition">Signin</a>
+            <a href="/login" class="text-gray-300 hover:text-[#f472b6] transition">Login</a>
+            <a href="/cart" class="bg-black text-white border border-[#f472b6]/40 px-4 py-2 rounded-full font-bold hover:bg-[#831843] transition">Cart 🛒</a>
+            <a href="/dashboard" class="bg-black text-[#f472b6] border border-[#f472b6]/40 px-4 py-2 rounded-full font-bold hover:bg-[#831843] transition">Dashboard</a>
+        </div>
+    </nav>
+    <!-- Banner Header -->
+    <section class="text-center my-20 px-4">
+        <h2 class="text-5xl md:text-7xl font-extrabold mb-4 text-white leading-tight">THE COZY ESPRESSO<br><span class="text-[#f472b6] neon-glow">Cozy Cafe</span></h2>
+        <p class="text-gray-400 text-lg mb-6 max-w-2xl mx-auto">Experience AI-Driven Drinks, Seamless Slot Booking & Aesthetic Premium Cozy Corners.</p>
+        <div class="flex gap-4 justify-center">
+            <a href="#booking" class="bg-black text-[#f472b6] border border-[#f472b6] px-8 py-3.5 rounded-full font-extrabold hover:bg-[#831843] hover:text-white transition shadow-lg shadow-pink-900/20">
+                ⚡ BOOK YOUR TABLE NOW
+            </a>
+            <a href="#mood-section" class="bg-gradient-to-r from-pink-500 to-rose-600 text-white px-8 py-3.5 rounded-full font-extrabold hover:opacity-90 transition shadow-lg shadow-rose-500/20">
+                🔮 AI MOOD MATCHER
+            </a>
+        </div>
+    </section>
+    <!-- NEW FEATURE: AI Mood-Based Drink Matcher Widget -->
+    <section id="mood-section" class="max-w-4xl mx-auto my-16 px-4">
+        <div class="bg-stone-900/80 border border-[#831843]/50 p-8 rounded-3xl shadow-xl text-center">
+            <h3 class="text-2xl font-black text-[#f472b6] neon-glow mb-2">🔮 Gen Z Vibe-O-Meter</h3>
+            <p class="text-xs text-gray-400 mb-6">Select your current vibe to instantly unlock a matching customized drink and a secret discount code!</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <button onclick="matchVibe('brain-fried')" class="bg-black border border-stone-850 hover:border-pink-500 p-4 rounded-2xl flex flex-col items-center justify-center transition duration-200">
+                    <span class="text-3xl mb-2">🧠</span>
+                    <span class="text-xs font-bold text-white">Brain Fried</span>
+                    <span class="text-[9px] text-pink-400 mt-1">Need focus / coding grind</span>
+                </button>
+                <button onclick="matchVibe('date-vibe')" class="bg-black border border-stone-850 hover:border-pink-500 p-4 rounded-2xl flex flex-col items-center justify-center transition duration-200">
+                    <span class="text-3xl mb-2">💖</span>
+                    <span class="text-xs font-bold text-white">Date Night</span>
+                    <span class="text-[9px] text-pink-400 mt-1">Dreamy & sweet vibe</span>
+                </button>
+                <button onclick="matchVibe('hyper-active')" class="bg-black border border-stone-850 hover:border-pink-500 p-4 rounded-2xl flex flex-col items-center justify-center transition duration-200">
+                    <span class="text-3xl mb-2">⚡</span>
+                    <span class="text-xs font-bold text-white">Hyper Active</span>
+                    <span class="text-[9px] text-pink-400 mt-1">High energy / hype</span>
+                </button>
+                <button onclick="matchVibe('relaxing')" class="bg-black border border-stone-850 hover:border-pink-500 p-4 rounded-2xl flex flex-col items-center justify-center transition duration-200">
+                    <span class="text-3xl mb-2">🍃</span>
+                    <span class="text-xs font-bold text-white">Chilled / Relaxing</span>
+                    <span class="text-[9px] text-pink-400 mt-1">Unwind / aesthetic chat</span>
+                </button>
+            </div>
+            <!-- Matching Result Container -->
+            <div id="vibe-result" class="hidden max-w-md mx-auto bg-stone-950 p-6 rounded-2xl border border-pink-500/40 text-left">
+                <div class="flex gap-4">
+                    <img id="vibe-drink-img" src="" class="w-24 h-24 object-cover rounded-xl border border-stone-800">
+                    <div class="flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-mono bg-pink-500/10 text-pink-400 px-2 py-0.5 rounded-full uppercase tracking-wider">VIBE MATCH</span>
+                            <h4 id="vibe-drink-name" class="font-extrabold text-white mt-1 text-lg"></h4>
+                            <p id="vibe-drink-desc" class="text-xs text-gray-400 mt-0.5"></p>
+                        </div>
+                        <div class="flex justify-between items-center mt-3">
+                            <div>
+                                <span class="text-[10px] text-gray-500 line-through mr-1" id="vibe-drink-orig"></span>
+                                <span class="text-sm font-black text-pink-400" id="vibe-drink-price"></span>
+                            </div>
+                            <form action="/add-to-cart" method="POST" class="m-0">
+                                <input type="hidden" name="item_name" id="vibe-form-name">
+                                <input type="hidden" name="price" id="vibe-form-price">
+                                <input type="hidden" name="image" id="vibe-form-image">
+                                <button type="submit" class="bg-pink-500 text-black px-4 py-1.5 rounded-lg text-xs font-bold hover:bg-pink-400 transition">ADD 🛒</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Live Menu Finder -->
+    <section id="menu-search-section" class="max-w-6xl mx-auto my-12 px-4">
+        <div class="bg-stone-900/60 border border-[#831843]/40 p-6 rounded-3xl shadow-xl">
+            <h3 class="text-xl font-bold mb-2 text-[#f472b6] text-center">🍿 Live Cafe Menu Finder</h3>
+            <p class="text-xs text-gray-400 text-center mb-6">Type drink, pizza, pasta or item name below to filter matching tastes instantly.</p>
+            
+            <div class="relative max-w-xl mx-auto mb-8">
+                <input type="text" id="menuSearchInput" onkeyup="filterMenu()" placeholder="Search item (e.g., Shake, Coffee, Pizza, Burger, Pasta)..." 
+                       class="w-full bg-stone-950 p-4 pl-12 rounded-xl border border-stone-800 text-white focus:outline-none focus:border-[#f472b6] text-sm">
+                <div class="absolute left-4 top-4 text-gray-500 font-bold">🔍</div>
+            </div>
+            
+            <div id="menuContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">       
+                {% for item in menu_items %}
+                <div class="menu-item bg-stone-950 p-4 rounded-xl border border-stone-900 flex flex-col justify-between transition hover:border-[#f472b6]/50"
+                     data-name="{{ item[1] | lower }} {{ item[2] | lower }}">
+                    <div>
+                        <!-- FIXED: Resolved local missing image files by switching to Unsplash live pictures -->
+                        {% if item[1] == "Mint Mojito" %} 
+                            <img src="https://images.unsplash.com/photo-1551751299-1b51cab2694c?w=500" class="w-full h-40 object-cover rounded-xl mb-3">
+                        {% elif item[1] == "Hot Americano" %} 
+                            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500" class="w-full h-40 object-cover rounded-xl mb-3">
+                        {% elif item[1] == "Chocolate Frappe" %} 
+                            <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500" class="w-full h-40 object-cover rounded-xl mb-3">
+                        {% elif item[1] == "Iced Vanilla Latte" %} 
+                            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=500" class="w-full h-40 object-cover rounded-xl mb-3">
+                        {% elif item[4] and (item[4].startswith('http://') or item[4].startswith('https://')) %}
+                            <img src="{{ item[4] }}" class="w-full h-40 object-cover rounded-xl mb-3">
+                        {% elif item[4] %}
+                            <img src="{{ url_for('static', filename=item[4]) }}" class="w-full h-40 object-cover rounded-xl mb-3">
+                        {% else %}
+                            <div class="w-full h-40 bg-stone-900 rounded-xl mb-3 flex items-center justify-center text-xs text-gray-500 font-mono">NO IMAGE</div>
+                        {% endif %}
+                        <div>
+                            <span class="text-[10px] text-[#f472b6] font-mono bg-[#f472b6]/10 px-2 py-0.5 rounded-full">{{ item[2] }}</span>
+                            <p class="font-bold text-white mt-2">{{ item[1] }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 pt-2 border-t border-stone-900">
+                        <span class="text-sm font-bold text-[#f472b6]">₹{{ item[3] }}</span>
+                        <form action="/add-to-cart" method="POST">
+                            <input type="hidden" name="item_name" value="{{ item[1] }}">
+                            <input type="hidden" name="price" value="{{ item[3] }}">
+                            {% if item[1] == "Mint Mojito" %}
+                                <input type="hidden" name="image" value="https://images.unsplash.com/photo-1551751299-1b51cab2694c?w=500">
+                            {% elif item[1] == "Hot Americano" %}
+                                <input type="hidden" name="image" value="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500">
+                            {% elif item[1] == "Chocolate Frappe" %}
+                                <input type="hidden" name="image" value="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500">
+                            {% elif item[1] == "Iced Vanilla Latte" %}
+                                <input type="hidden" name="image" value="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=500">
+                            {% else %}
+                                <input type="hidden" name="image" value="{{ item[4] }}">
+                            {% endif %}
+                            
+                            <!-- Matte Black Button -->
+                            <button type="submit" class="w-full bg-black text-white border border-[#f472b6]/40 hover:bg-[#831843] hover:border-[#f472b6] py-2 rounded-lg font-bold mt-3 transition text-xs">
+                                ADD
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}           
+                <div class="menu-item bg-stone-950 p-4 rounded-xl border border-stone-900 flex flex-col justify-between transition hover:border-[#f472b6]/50" data-name="loaded cheese farm pizza fast food square">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=500&auto=format&fit=crop" alt="Loaded Cheese Pizza" class="w-full h-40 object-cover rounded-xl mb-3">
+                    <div>
+                        <span class="text-[10px] text-[#f472b6] font-mono bg-[#f472b6]/10 px-2 py-0.5 rounded-full">Pizza Hub</span>
+                        <p class="font-bold text-white mt-1">Loaded Cheese Pizza</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-stone-900">
+                        <span class="text-sm font-bold text-[#f472b6] block mb-2">₹320</span>
+                        <form action="/add-to-cart" method="POST">
+                            <input type="hidden" name="item_name" value="Loaded Cheese Pizza">
+                            <input type="hidden" name="price" value="320">
+                            <input type="hidden" name="image" value="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=500&auto=format&fit=crop">
+                            <button type="submit" class="w-full bg-black text-white border border-[#f472b6]/40 hover:bg-[#831843] py-2 rounded-lg font-bold transition text-xs">ADD</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="menu-item bg-stone-950 p-4 rounded-xl border border-stone-900 flex flex-col justify-between transition hover:border-[#f472b6]/50" data-name="spicy peri peri paneer pizza thin crust">
+                    <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?q=80&w=500&auto=format&fit=crop" alt="Peri Peri Paneer Pizza" class="w-full h-40 object-cover rounded-xl mb-3">
+                    <div>
+                        <span class="text-[10px] text-[#f472b6] font-mono bg-[#f472b6]/10 px-2 py-0.5 rounded-full">Pizza Hub</span>
+                        <p class="font-bold text-white mt-1">Peri Peri Paneer Pizza</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-stone-900">
+                        <span class="text-sm font-bold text-[#f472b6] block mb-2">₹360</span>
+                        <form action="/add-to-cart" method="POST">
+                            <input type="hidden" name="item_name" value="Peri Peri Paneer Pizza">
+                            <input type="hidden" name="price" value="360">
+                            <input type="hidden" name="image" value="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?q=80&w=500&auto=format&fit=crop">
+                            <button type="submit" class="w-full bg-black text-white border border-[#f472b6]/40 hover:bg-[#831843] py-2 rounded-lg font-bold transition text-xs">ADD</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="menu-item bg-stone-950 p-4 rounded-xl border border-stone-900 flex flex-col justify-between transition hover:border-[#f472b6]/50" data-name="creamy white sauce pasta Italian penni">
+                    <img src="https://images.unsplash.com/photo-1645112411341-6c4fd023714a?q=80&w=500&auto=format&fit=crop" alt="White Sauce Pasta" class="w-full h-40 object-cover rounded-xl mb-3">
+                    <div>
+                        <span class="text-[10px] text-[#f472b6] font-mono bg-[#f472b6]/10 px-2 py-0.5 rounded-full">Pastas</span>
+                        <p class="font-bold text-white mt-1">Creamy White Sauce Pasta</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-stone-900">
+                        <span class="text-sm font-bold text-[#f472b6] block mb-2">₹240</span>
+                        <form action="/add-to-cart" method="POST">
+                            <input type="hidden" name="item_name" value="Creamy White Sauce Pasta">
+                            <input type="hidden" name="price" value="240">
+                            <input type="hidden" name="image" value="https://images.unsplash.com/photo-1645112411341-6c4fd023714a?q=80&w=500&auto=format&fit=crop">
+                            <button type="submit" class="w-full bg-black text-white border border-[#f472b6]/40 hover:bg-[#831843] py-2 rounded-lg font-bold transition text-xs">ADD</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="menu-item bg-stone-950 p-4 rounded-xl border border-stone-900 flex flex-col justify-between transition hover:border-[#f472b6]/50" data-name="kitkat thick premium shake chocolate drink">
+                    <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?q=80&w=500&auto=format&fit=crop" alt="KitKat Premium Shake" class="w-full h-40 object-cover rounded-xl mb-3">
+                    <div>
+                        <span class="text-[10px] text-[#f472b6] font-mono bg-[#f472b6]/10 px-2 py-0.5 rounded-full">Beverages</span>
+                        <p class="font-bold text-white mt-1">KitKat Premium Shake</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-stone-900">
+                        <span class="text-sm font-bold text-[#f472b6] block mb-2">₹250</span>
+                        <form action="/add-to-cart" method="POST">
+                            <input type="hidden" name="item_name" value="KitKat Premium Shake">
+                            <input type="hidden" name="price" value="250">
+                            <input type="hidden" name="image" value="https://images.unsplash.com/photo-1572490122747-3968b75cc699?q=80&w=500&auto=format&fit=crop">
+                            <button type="submit" class="w-full bg-black text-white border border-[#f472b6]/40 hover:bg-[#831843] py-2 rounded-lg font-bold transition text-xs">ADD</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="menu-item bg-stone-950 p-4 rounded-xl border border-stone-900 flex flex-col justify-between transition hover:border-[#f472b6]/50" data-name="iced vanilla latte cold brewed robusta coffee">
+                    <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=500&auto=format&fit=crop" alt="Iced Vanilla Latte" class="w-full h-40 object-cover rounded-xl mb-3">
+                    <div>
+                        <span class="text-[10px] text-[#f472b6] font-mono bg-[#f472b6]/10 px-2 py-0.5 rounded-full">Coffee Bar</span>
+                        <p class="font-bold text-white mt-1">Iced Vanilla Latte</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-stone-900">
+                        <span class="text-sm font-bold text-[#f472b6] block mb-2">₹220</span>
+                        <form action="/add-to-cart" method="POST">
+                            <input type="hidden" name="item_name" value="Iced Vanilla Latte">
+                            <input type="hidden" name="price" value="220">
+                            <input type="hidden" name="image" value="https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=500&auto=format&fit=crop">
+                            <button type="submit" class="w-full bg-black text-white border border-[#f472b6]/40 hover:bg-[#831843] py-2 rounded-lg font-bold transition text-xs">ADD</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="menu-item bg-stone-950 p-4 rounded-xl border border-stone-900 flex flex-col justify-between transition hover:border-[#f472b6]/50" data-name="crispy double patty burger veg snacks cheddar">
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=500&auto=format&fit=crop" alt="Crispy Veg Burger" class="w-full h-40 object-cover rounded-xl mb-3">
+                    <div>
+                        <span class="text-[10px] text-[#f472b6] font-mono bg-[#f472b6]/10 px-2 py-0.5 rounded-full">Snacks</span>
+                        <p class="font-bold text-white mt-1">Crispy Veg Burger</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-stone-900">
+                        <span class="text-sm font-bold text-[#f472b6] block mb-2">₹180</span>
+                        <form action="/add-to-cart" method="POST">
+                            <input type="hidden" name="item_name" value="Crispy Veg Burger">
+                            <input type="hidden" name="price" value="180">
+                            <input type="hidden" name="image" value="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=500&auto=format&fit=crop">
+                            <button type="submit" class="w-full bg-black text-white border border-[#f472b6]/40 hover:bg-[#831843] py-2 rounded-lg font-bold transition text-xs">ADD</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="menu-item bg-stone-950 p-4 rounded-xl border border-stone-900 flex flex-col justify-between transition hover:border-[#f472b6]/50" data-name="salted crisp french fries finger chips crispy sides">
+                    <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=500&auto=format&fit=crop" alt="Classic French Fries" class="w-full h-40 object-cover rounded-xl mb-3">
+                    <div>
+                        <span class="text-[10px] text-[#f472b6] font-mono bg-[#f472b6]/10 px-2 py-0.5 rounded-full">Quick Bites</span>
+                        <p class="font-bold text-white mt-1">Classic French Fries</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-stone-900">
+                        <span class="text-sm font-bold text-[#f472b6] block mb-2">₹130</span>
+                        <form action="/add-to-cart" method="POST">
+                            <input type="hidden" name="item_name" value="Classic French Fries">
+                            <input type="hidden" name="price" value="130">
+                            <input type="hidden" name="image" value="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=500&auto=format&fit=crop">
+                            <button type="submit" class="w-full bg-black text-white border border-[#f472b6]/40 hover:bg-[#831843] py-2 rounded-lg font-bold transition text-xs">ADD</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Slot Reservation Form & Live DJ Music Queue Side by Side -->
+    <div class="max-w-6xl mx-auto my-16 px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Slot Reservation Form -->
+        <section id="booking" class="p-8 bg-stone-900/80 rounded-3xl border border-[#831843]/40 shadow-lg shadow-pink-950/10 h-full flex flex-col justify-between">
+            <div>
+                <h3 class="text-3xl font-black mb-2 text-[#f472b6] neon-glow">🔒 Secure Your Tech-Slot</h3>
+                <p class="text-gray-400 mb-6 text-sm">Skip the queue, book your table securely in our SQL database.</p>     
+            </div>
+            <form action="/book" method="POST" class="space-y-4">
+                <div>
+                    <input type="text" name="name" placeholder="Your Name" class="w-full bg-stone-950 p-3.5 rounded-xl border border-stone-800 text-white focus:outline-none focus:border-[#f472b6] text-sm" required>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" name="phone" placeholder="Phone Number" class="w-full bg-stone-950 p-3.5 rounded-xl border border-stone-800 text-white focus:outline-none focus:border-[#f472b6] text-sm" required>
+                    <input type="number" name="guests" placeholder="No. of Guests" class="w-full bg-stone-950 p-3.5 rounded-xl border border-stone-800 text-white focus:outline-none focus:border-[#f472b6] text-sm" required>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="date" name="date" class="w-full bg-stone-950 p-3.5 rounded-xl border border-stone-800 text-white focus:outline-none focus:border-[#f472b6] text-sm" required>
+                    <select name="slot" class="w-full bg-stone-950 p-3.5 rounded-xl border border-stone-800 text-white focus:outline-none focus:border-[#f472b6] text-sm" required>
+                        <option value="Morning 10-12">Morning 10 AM - 12 PM</option>
+                        <option value="Afternoon 1-3">Afternoon 1 PM - 3 PM</option>
+                        <option value="Evening 5-7">Evening 5 PM - 7 PM</option>
+                        <option value="Night 8-10">Night 8 PM - 10 PM</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-black text-white border border-[#f472b6]/40 hover:bg-[#831843] hover:border-[#f472b6] py-4 rounded-xl font-extrabold uppercase tracking-wider transition duration-200 text-sm">
+                    Confirm Booking
+                </button>
+            </form>
+        </section>
+        <!-- NEW FEATURE: Live Spotify DJ Music Queue Request System -->
+        <section id="music-queue" class="p-8 bg-stone-900/80 rounded-3xl border border-[#831843]/40 shadow-lg shadow-pink-950/10 h-full flex flex-col justify-between">
+            <div>
+                <h3 class="text-3xl font-black mb-2 text-[#f472b6] neon-glow">🎵 Live Speakers DJ Queue</h3>
+                <p class="text-gray-400 mb-6 text-sm">Vibe check the cafe! Add your favorite song to our speakers queue.</p>
+            </div>
+            
+            <form action="/submit-song-request" method="POST" class="space-y-3 mb-6">
+                <div class="grid grid-cols-2 gap-3">
+                    <input type="text" name="song_name" placeholder="Song Name" class="bg-stone-950 p-3 rounded-xl border border-stone-800 text-white focus:outline-none focus:border-[#f472b6] text-xs w-full" required>
+                    <input type="text" name="artist" placeholder="Artist" class="bg-stone-950 p-3 rounded-xl border border-stone-800 text-white focus:outline-none focus:border-[#f472b6] text-xs w-full" required>
+                </div>
+                <div class="flex gap-2">
+                    <input type="text" name="requested_by" placeholder="Your Handle (e.g. Riya)" class="bg-stone-950 p-3 rounded-xl border border-stone-800 text-white focus:outline-none focus:border-[#f472b6] text-xs flex-1" required>
+                    <button type="submit" class="bg-[#831843] text-white px-5 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-[#9d174d] transition">
+                        Queue Song
+                    </button>
+                </div>
+            </form>
+            <div class="space-y-2 max-h-56 overflow-y-auto pr-1">
+                <p class="text-[10px] font-mono text-[#f472b6] uppercase tracking-wider">🎧 Up Next on Cafe Speakers:</p>
+                {% if song_requests %}
+                    {% for song in song_requests %}
+                    <div class="bg-stone-950 p-3 rounded-xl border border-stone-900 flex justify-between items-center">
+                        <div>
+                            <p class="text-white text-xs font-bold">🎵 {{ song[1] }}</p>
+                            <p class="text-[10px] text-gray-500 mt-0.5">by {{ song[2] }}</p>
+                        </div>
+                        <span class="text-[9px] text-[#f472b6] font-semibold bg-[#f472b6]/10 px-2 py-0.5 rounded-full">Req: @{{ song[3] }}</span>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-xs text-stone-600 italic">Speakers queue is empty. Be the first to request a song!</p>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+    <!-- Track Reservation Logs -->
+    <section id="track-booking" class="max-w-xl mx-auto my-12 p-6 bg-stone-900/80 rounded-3xl border border-[#831843]/40 shadow-xl">
+        <h3 class="text-xl font-bold text-center text-[#f472b6] mb-1">🔎 Track Your Booking History</h3>
+        <p class="text-xs text-center text-gray-400 mb-4">Enter your registered Phone Number to extract active slots.</p>
+        <form action="/customer-history#track-booking" method="POST" class="flex gap-2 mb-4">
+            <input type="text" name="search_input" placeholder="Enter Phone number..." 
+                   value="{{ searched_by if searched_by else '' }}"
+                   class="flex-1 bg-stone-950 p-3 rounded-xl border border-stone-800 text-white text-sm focus:outline-none focus:border-[#f472b6]" required>
+            <!-- Matte Black Button -->
+            <button type="submit" class="bg-black text-[#f472b6] border border-[#f472b6]/40 hover:bg-[#831843] px-5 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition">
+                Search Logs
+            </button>
+        </form>
+        {% if user_bookings %}
+            <div class="space-y-3 max-h-64 overflow-y-auto pr-1 mt-4">
+                <p class="text-[11px] font-mono text-[#f472b6]/75 uppercase tracking-wider">📋 Found {{ user_bookings|length }} Records:</p>
+                {% for booking in user_bookings %}
+                    <div class="bg-stone-950 p-3 rounded-xl border border-stone-900 flex justify-between items-center transition hover:border-[#f472b6]/30">
+                        <div>
+                            <p class="text-white text-sm font-bold">📅 Date: {{ booking[0] }}</p>
+                            <p class="text-xs text-gray-400 mt-1">⏱️ Timing: <span class="text-slate-300 font-medium">{{ booking[1] }}</span> | 👥 Pax: <span class="text-slate-300 font-medium">{{ booking[2] }} Guests</span></p>
+                        </div>
+                        <span class="text-[10px] font-bold px-2 py-1 rounded bg-[#f472b6]/10 text-[#f472b6] uppercase tracking-widest border border-[#f472b6]/20">Confirmed</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% elif searched_by %}
+            <div class="text-center py-4 mt-2 bg-rose-950/20 rounded-xl border border-rose-500/20">
+                <p class="text-xs font-semibold text-rose-400">❌ No active logs found for "{{ searched_by }}"</p>
+            </div>
+        {% endif %}
+    </section>
+    <!-- NEW FEATURE: Gen Z Community Vibe Wall (Bulletin Board) -->
+    <section id="vibe-wall" class="max-w-6xl mx-auto my-16 px-4">
+        <h3 class="text-3xl font-bold mb-2 text-center text-[#f472b6] neon-glow font-black">💬 Gen Z Vibe Wall</h3>
+        <p class="text-xs text-gray-400 text-center mb-8">Leave an anonymous vibe note on our virtual post-it board.</p>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Vibe form -->
+            <div class="bg-stone-900/90 border border-[#831843]/40 p-6 rounded-3xl h-fit">
+                <h4 class="text-lg font-bold text-white mb-3">Check in your vibe</h4>
+                <form action="/submit-vibe-note" method="POST" enctype="multipart/form-data" class="space-y-4">
+                    <div>
+                        <label class="text-[10px] uppercase font-mono text-gray-400 block mb-1">Your Name/Handle</label>
+                        <input type="text" name="author" placeholder="E.g. Tanmay" class="w-full bg-stone-950 p-3 rounded-xl border border-stone-800 text-white focus:outline-none focus:border-[#f472b6] text-xs" required>
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase font-mono text-gray-400 block mb-1">Your Vibe Message</label>
+                        <textarea name="note" placeholder="Write a quick post-it check-in..." rows="3" class="w-full bg-stone-950 p-3 rounded-xl border border-stone-800 text-white focus:outline-none focus:border-[#f472b6] text-xs" required></textarea>
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase font-mono text-gray-400 block mb-1">Attach Vibe Photo (Optional)</label>
+                        <input type="file" name="vibe_image" class="w-full bg-stone-950 p-2 rounded-xl border border-stone-800 text-xs text-gray-400 focus:outline-none focus:border-[#f472b6]">
+                    </div>
+                    <!-- Matte Black Button -->
+                    <button type="submit" class="w-full bg-black text-[#f472b6] border border-[#f472b6]/40 hover:bg-[#831843] py-2.5 rounded-xl font-bold transition text-xs">
+                        Post to Vibe Wall 📌
+                    </button>
+                </form>
+            </div>
+            <!-- Notes Board Grid -->
+            <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-h-[460px] overflow-y-auto pr-1">
+                {% if vibe_notes %}
+                    {% for note in vibe_notes %}
+                    <div class="bg-gradient-to-br from-stone-900 to-pink-950/20 border border-stone-850 p-5 rounded-2xl flex flex-col justify-between shadow transition duration-200 hover:border-[#f472b6]/40">
+                        <div>
+                            {% if note[3] %}
+                                <img src="{{ url_for('static', filename=note[3]) }}" class="w-full h-32 object-cover rounded-xl mb-3 border border-stone-800">
+                            {% endif %}
+                            <p class="text-xs text-gray-200 leading-relaxed italic">"{{ note[2] }}"</p>
+                        </div>
+                        <div class="mt-4 pt-2 border-t border-stone-850/60 flex justify-between items-center text-[10px] text-gray-500 font-mono">
+                            <span class="text-pink-400 font-bold">@{{ note[1] }}</span>
+                            <span>{{ note[4] if note[4] else '' }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-span-3 text-center py-16 bg-stone-900/40 border border-stone-850 rounded-2xl italic text-gray-600 text-xs">
+                        No post-its pinned yet. Write one on the left!
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <!-- Gallery Section -->
+    <section id="gallery" class="max-w-6xl mx-auto my-16 px-4">
+        <h3 class="text-3xl font-bold mb-8 text-center text-[#f472b6] neon-glow">✨ Cafe Aesthetic Vibe Check</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {% if photos %}
+                {% for photo in photos %}
+                <div class="bg-stone-900 rounded-xl overflow-hidden border border-stone-800 hover:scale-105 transition duration-300">
+                    <!-- FIXED: Prepend static uploads or check for live Unsplash URLs -->
+                    {% if photo[2] and (photo[2].startswith('http://') or photo[2].startswith('https://')) %}
+                        <img src="{{ photo[2] }}" alt="{{ photo[1] }}" class="w-full h-64 object-cover">
+                    {% elif photo[1] == "Coffee Counter" or (photo[2] and "coffee" in photo[2]|lower) %}
+                        <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=600&auto=format&fit=crop" alt="{{ photo[1] }}" class="w-full h-64 object-cover">
+                    {% elif photo[1] == "Cafe Interior" or (photo[2] and ("interior" in photo[2]|lower or "cafe" in photo[2]|lower)) %}
+                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=600&auto=format&fit=crop" alt="{{ photo[1] }}" class="w-full h-64 object-cover">
+                    {% elif photo[2] %}
+                        <img src="{{ url_for('static', filename=photo[2]) }}" alt="{{ photo[1] }}" class="w-full h-64 object-cover">
+                    {% else %}
+                        <div class="w-full h-64 bg-stone-950 flex items-center justify-center text-xs text-gray-500 font-mono">NO IMAGE</div>
+                    {% endif %}
+                    <div class="p-4 bg-stone-950/60">
+                        <p class="font-bold text-lg text-white">{{ photo[1] }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <!-- Fallback defaults -->
+                <div class="bg-stone-900 rounded-xl overflow-hidden border border-stone-800">
+                    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600" class="w-full h-64 object-cover">
+                    <div class="p-4 bg-stone-950/60"><p class="font-bold text-lg text-white">Cozy Corner Vibing</p></div>
+                </div>
+                <div class="bg-stone-900 rounded-xl overflow-hidden border border-stone-800">
+                    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600" class="w-full h-64 object-cover">
+                    <div class="p-4 bg-stone-950/60"><p class="font-bold text-lg text-white">Barista Masterclass</p></div>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+    <!-- Connect & Vibe offers -->
+    <section id="about-contact" class="max-w-6xl mx-auto my-20 px-4 border-t border-stone-800/60 pt-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            
+            <div class="bg-stone-900/40 border border-[#831843]/40 p-8 rounded-3xl flex flex-col justify-between">
+                <div>
+                    <span class="text-xs font-mono tracking-widest text-[#f472b6] uppercase">✨ Our Story</span>
+                    <h2 class="text-3xl font-black text-white mt-2 mb-4">About Cozy Cafe</h2>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Welcome to India's first completely automated tech-cafe experience. We blend premium specialty coffee with cutting-edge artificial intelligence. Match your vibes on a weekend date or code your next big pipeline.
+                    </p>
+                </div>
+                <div class="mt-6 flex gap-4 text-xs font-mono text-stone-500">
+                    <div>⚡ High-Speed Wi-Fi</div>
+                    <div>☕ Premium Beans</div>
+                    <div>🤖 AI Chat 24/7</div>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-br from-stone-900 to-pink-950/40 border border-[#f472b6]/30 p-6 rounded-3xl text-center flex flex-col items-center justify-between">
+                <div>
+                    <span class="text-xs font-bold text-[#f472b6] uppercase tracking-widest bg-[#f472b6]/10 px-3 py-1 rounded-full">🎁 Weekly Mega Giveaway</span>
+                    <h3 class="text-xl font-extrabold text-white mt-3 mb-1">2 Couples Special Coupons</h3>
+                    <p class="text-xs text-gray-400 mb-4">Free Date Night Slot & Custom Dessert Platters unlocked!</p>
+                </div>
+                
+                <div class="w-full bg-stone-950/80 p-4 rounded-xl border border-stone-900 space-y-3 text-left">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-[#f472b6] font-bold">❤️ Couple 1 Winner:</span>
+                        <span class="text-white font-mono bg-stone-900 px-2 py-0.5 rounded">#AmanRiya99</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-[#f472b6] font-bold">❤️ Couple 2 Winner:</span>
+                        <span class="text-white font-mono bg-stone-900 px-2 py-0.5 rounded">#KabirNeha21</span>
+                    </div>
+                </div>
+                <p class="text-[10px] text-[#f472b6] font-semibold animate-pulse mt-2">Next Sunday Draw Live On Insta Stories!</p>
+            </div>
+            <div class="bg-gradient-to-br from-stone-900 to-stone-950 border border-[#f472b6]/30 p-6 rounded-3xl text-center flex flex-col items-center justify-center">
+                <span class="text-xs font-bold text-[#f472b6] uppercase tracking-widest mb-2">📸 Catch the Vibe</span>
+                <h3 class="text-lg font-extrabold text-white mb-4">Follow Us on Insta</h3>
+                
+                <div class="bg-white p-2.5 rounded-2xl inline-block shadow-lg">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://instagram.com" alt="Insta QR" class="w-32 h-32 block mx-auto">
+                </div>
+                
+                <p class="text-[11px] text-gray-500 mt-3">Scan for dynamic aesthetic reels, food updates & coupon verification!</p>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Form -->
+    <section id="contact" class="max-w-xl mx-auto my-16 p-8 bg-stone-900/80 rounded-3xl border border-[#831843]/40">
+        <h2 class="text-3xl font-bold text-[#f472b6] text-center mb-6">📩 Contact Us</h2>
+        <form action="/contact" method="POST" class="space-y-4">
+            <input type="text" name="name" placeholder="Your Name"
+            class="w-full p-3 bg-stone-950 border border-stone-850 rounded text-white text-sm focus:outline-none focus:border-[#f472b6]" required>
+            <input type="email" name="email" placeholder="Your Email"
+            class="w-full p-3 bg-stone-950 border border-stone-850 rounded text-white text-sm focus:outline-none focus:border-[#f472b6]" required>
+            <textarea name="message" placeholder="Your Message"
+            class="w-full p-3 bg-stone-950 border border-stone-850 rounded text-white h-32 text-sm focus:outline-none focus:border-[#f472b6]" required></textarea>
+            <!-- Matte Black Button -->
+            <button class="w-full bg-black text-[#f472b6] border border-[#f472b6]/45 hover:bg-[#831843] hover:text-white p-3 rounded-xl font-bold transition duration-200 text-sm">
+                Send Message
+            </button>
+        </form>
+    </section>
+    <!-- MOVED: Add Menu Item Form Card (Moved from dashboard right above Location map) -->
+    <section id="add-menu-section" class="max-w-xl mx-auto my-16 p-8 bg-stone-900/80 rounded-3xl border border-[#831843]/45 shadow-lg">
+        <h3 class="text-2xl font-black text-[#f472b6] text-center mb-2">🍔 Add New Dish to Menu</h3>
+        <p class="text-xs text-gray-400 text-center mb-6">Instantly register new drinks or food plates to the smart menu finder.</p>
+        <form action="/add-menu-item" method="POST" enctype="multipart/form-data" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" name="item_name" placeholder="Dish Name (E.g. Cappuccino)" class="bg-stone-950 p-3 rounded-xl border border-stone-800 text-white focus:outline-none focus:border-[#f472b6] text-sm w-full" required>
+                <input type="text" name="item_category" placeholder="Category (E.g. Coffee Bar)" class="bg-stone-950 p-3 rounded-xl border border-stone-800 text-white focus:outline-none focus:border-[#f472b6] text-sm w-full" required>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="number" step="0.01" name="item_price" placeholder="Price in ₹" class="bg-stone-950 p-3 rounded-xl border border-stone-800 text-white focus:outline-none focus:border-[#f472b6] text-sm w-full" required>
+                <div class="w-full flex flex-col justify-center">
+                    <label class="text-[10px] text-gray-400 mb-1">Select dish photo:</label>
+                    <input type="file" name="item_image" class="bg-stone-950 p-2 rounded-xl border border-stone-800 text-xs text-gray-400 w-full" required>
+                </div>
+            </div>
+            <!-- Matte Black Button -->
+            <button type="submit" class="w-full bg-black text-[#f472b6] border border-[#f472b6] hover:bg-[#831843] hover:text-white py-3 rounded-xl font-bold transition text-sm uppercase tracking-wider">
+                Upload New Item
+            </button>
+        </form>
+    </section>
+    <!-- Location -->
+    <section id="location" class="max-w-6xl mx-auto my-16 px-4">
+        <h2 class="text-3xl font-bold text-[#f472b6] text-center mb-6">📍 Our Location</h2>
+        <div class="rounded-3xl overflow-hidden border border-[#831843]/40">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=https://www.google.com/maps/place/Bypass,+138-A,+Tonk+Rd,+Vasundhara+Colony,+Gopal+Pura+Mode,+Jaipur,+Rajasthan+302018/@26.864052,75.7913567,17z/data=!3m1!4b1!4m6!3m5!1s0x396db5ce35a11095:0xdfce7b64c9c2ec7!8m2!3d26.864052!4d75.793937!16s%2Fg%2F11vlq_vqfm?entry=ttu&g_ep=EgoyMDI2MDYyMS4wIKXMDSoASAFQAw%3D%3D"
+                width="100%" 
+                height="400"
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+        </div>
+    </section>
+    <footer class="text-center py-10 text-stone-600 border-t border-stone-900">
+        <p>&copy; 2026 Cozy Cafe Project. Built with Cozy Pink Vibe.</p>
+    </footer>
+    
+    <script>
+        function filterMenu() {
+            let input = document.getElementById('menuSearchInput').value.toLowerCase().trim();
+            let items = document.getElementsByClassName('menu-item');
+            
+            for (let i = 0; i < items.length; i++) {
+                let itemName = items[i].getAttribute('data-name');
+                if (itemName) {
+                    if (itemName.includes(input)) {
+                        items[i].style.display = "flex";
+                    } else {
+                        items[i].style.display = "none";
+                    }
+                }
+            }
+        }
+        // Vibe-Matcher Client-side Logic
+        const vibeMatches = {
+            'brain-fried': {
+                name: 'Hot Americano',
+                desc: 'Double shot dark robusta coffee to restart your CPU.',
+                origPrice: '₹180',
+                discPrice: '₹150',
+                rawPrice: 150.00,
+                img: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500'
+            },
+            'date-vibe': {
+                name: 'Iced Vanilla Latte',
+                desc: 'Creamy specialty vanilla base cold espresso for sweet dates.',
+                origPrice: '₹220',
+                discPrice: '₹190',
+                rawPrice: 190.00,
+                img: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=500'
+            },
+            'hyper-active': {
+                name: 'Chocolate Frappe',
+                desc: 'Rich premium dark chocolate blended freeze to keep the hype going.',
+                origPrice: '₹280',
+                discPrice: '₹240',
+                rawPrice: 240.00,
+                img: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500'
+            },
+            'relaxing': {
+                name: 'Mint Mojito',
+                desc: 'Refreshing ice cold mint & lime syrup soda to wind down.',
+                origPrice: '₹200',
+                discPrice: '₹170',
+                rawPrice: 170.00,
+                img: 'https://images.unsplash.com/photo-1551751299-1b51cab2694c?w=500'
+            }
+        };
+        function matchVibe(vibeKey) {
+            const data = vibeMatches[vibeKey];
+            if (!data) return;
+            document.getElementById('vibe-drink-img').src = data.img;
+            document.getElementById('vibe-drink-name').innerText = data.name + " (Promo Price)";
+            document.getElementById('vibe-drink-desc').innerText = data.desc;
+            document.getElementById('vibe-drink-orig').innerText = data.origPrice;
+            document.getElementById('vibe-drink-price').innerText = data.discPrice;
+            // Form inputs setup
+            document.getElementById('vibe-form-name').value = data.name;
+            document.getElementById('vibe-form-price').value = data.rawPrice;
+            document.getElementById('vibe-form-image').value = data.img;
+            // Show result block
+            document.getElementById('vibe-result').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

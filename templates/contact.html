@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Smart Cafe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(rgba(18, 14, 11, 0.94), rgba(18, 14, 11, 0.96)), url('https://images.unsplash.com/photo-1498804103079-a6351b050096?q=80&w=1600') no-repeat center center fixed;
+            background-size: cover;
+            color: #e4e4e7;
+        }
+        .neon-glow { text-shadow: 0 0 10px #d4a373, 0 0 20px #a1724e; }
+    </style>
+</head>
+<body class="font-sans flex items-center justify-center min-h-screen p-6">
+    <div class="max-w-md w-full bg-stone-900/90 border border-stone-850 p-8 rounded-3xl shadow-2xl">
+        <div class="text-center mb-8">
+            <h1 class="text-2xl font-black text-[#d4a373] neon-glow uppercase">Contact Us</h1>
+            <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-mono">Send your feedback or queries</p>
+        </div>
+        <form action="/contact" method="POST" class="space-y-4">
+            <div>
+                <label class="text-[10px] uppercase font-mono text-gray-400 block mb-1">Your Name</label>
+                <input name="name" type="text" placeholder="E.g. Pammy Saini"
+                       class="w-full bg-stone-950 p-3.5 rounded-xl border border-stone-800 text-white focus:outline-none focus:border-[#d4a373] text-sm" required>
+            </div>
+            <div>
+                <label class="text-[10px] uppercase font-mono text-gray-400 block mb-1">Phone / Email</label>
+                <input name="email" type="text" placeholder="E.g. +91... or email@example.com"
+                       class="w-full bg-stone-950 p-3.5 rounded-xl border border-stone-800 text-white focus:outline-none focus:border-[#d4a373] text-sm" required>
+            </div>
+            <div>
+                <label class="text-[10px] uppercase font-mono text-gray-400 block mb-1">Message</label>
+                <textarea name="message" placeholder="Type your suggestion or query..." rows="3"
+                          class="w-full bg-stone-950 p-3.5 rounded-xl border border-stone-800 text-white focus:outline-none focus:border-[#d4a373] text-sm" required></textarea>
+            </div>
+            <!-- Matte Black Button -->
+            <button type="submit" class="w-full bg-black text-white border border-[#b5835a]/50 hover:bg-[#3E2723] hover:border-[#b5835a] py-3.5 rounded-xl font-bold uppercase tracking-wider transition text-xs mt-4">
+                Send Message
+            </button>
+        </form>
+        <div class="mt-6 text-center">
+            <a href="/" class="text-xs text-gray-500 hover:text-white transition">← Return to Home</a>
+        </div>
+    </div>
+</body>
+</html>
