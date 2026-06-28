@@ -1,1 +1,54 @@
+======================================================================
+                  COZY CAFE - PROJECT SETUP & RUN STEPS
+======================================================================
+Yeh file Cozy Cafe project ko successfully setup aur run karne ke step-by-step instructions deti hai.
+----------------------------------------------------------------------
+STEP 1: DATABASE SETUP (MySQL)
+----------------------------------------------------------------------
+1. Apne system par MySQL Server ko start karein.
+2. Default Database configuration niche ke anusar set hai:
+   - Host: localhost
+   - User: root
+   - Password: pammysaini
+   - Database Name: smart_cafe_db (Yeh app startup par auto-create ho jayega)
+*Note: Agar aapko database password badalna hai, toh use "app.py" ke configuration section (Lines 28-31) mein update karein.
+----------------------------------------------------------------------
+STEP 2: VIRTUAL ENVIRONMENT & DEPENDENCIES INSTALLATION
+----------------------------------------------------------------------
+1. VS Code ya system terminal open karein aur project directory par jayein:
+   cd "C:\Users\pammy\Desktop\ml(smart cafe design)"
+2. Virtual Environment ko active karein (Agar pehle se bana hai):
+   - Windows Powershell:
+     .venv\Scripts\Activate.ps1
+   - Windows Command Prompt (cmd):
+     .venv\Scripts\activate.bat
+3. Sabhi Python Packages install karein:
+   pip install -r requirements.txt
+   *Note: Agar pymysql ya flask-mysqldb runtime me dikkat kare, toh install karein:
+   pip install cryptography pymysql flask-mysqldb google-generativeai
+----------------------------------------------------------------------
+STEP 3: RUN THE APPLICATION
+----------------------------------------------------------------------
+1. Terminal mein application run karne ke liye type karein:
+   python app.py
+2. Web Browser open karein aur niche diye gaye URL par jayein:
+   http://127.0.0.1:5000/
+----------------------------------------------------------------------
+STEP 4: EXPLORE CAFE FEATURES
+----------------------------------------------------------------------
+1. Customer Home Interface (http://127.0.0.1:5000/):
+   - AI Vibe Matcher: Mood check karein aur discount par drinks order karein.
+   - Community Vibe Wall: Post-it notes likhein aur vibes photo upload karein (Failsafe fixed!).
+   - Spotify DJ Queue: Live song request submit karein.
+   - Slot Booking: Seat table booking karein aur booking log track karein.
+2. AI Drink Portal (http://127.0.0.1:5000/chat):
+   - Smart Gemini chatbot jo Hinglish/Hindi support ke saath customized drink recommend karta hai.
+3. Admin Dashboard (http://127.0.0.1:5000/dashboard):
+   - Active bookings aur orders management queue.
+   - ML Occupancy Prediction logic charts aur weekly logs.
+   - Vibe Wall post-its deletion aur Spotify DJ moderation (Songs queue clear-up).
+   - Support tickts resolution/queries status.
+4. Weekly Winners Select (http://127.0.0.1:5000/weekly-winners):
+   - Automated giveaway selection for couples special coupons.
+======================================================================
 
