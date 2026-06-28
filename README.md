@@ -1,4 +1,4 @@
-Cozy Cafe 🌸 - Next-Gen AI & ML Specialty Tech-Cafe
+# Cozy Cafe 🌸 - Next-Gen AI & ML Specialty Tech-Cafe
 
 
 
