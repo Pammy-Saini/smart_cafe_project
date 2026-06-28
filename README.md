@@ -1,4 +1,8 @@
 Cozy Cafe 🌸 - Next-Gen AI & ML Specialty Tech-Cafe
+
+
+
+
 Cozy Cafe is a responsive, aesthetically stunning Flask web application designed for a modern, tech-forward cafe experience. Blending premium specialty coffee vibes with state-of-the-art Artificial Intelligence and Machine Learning, the platform is tailored for Gen Z and tech lovers.
 
 🚀 Key Features
