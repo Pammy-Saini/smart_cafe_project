@@ -932,4 +932,4 @@ if __name__ == '__main__':
     except Exception as e:
         print(f"ML Startup Training Skipped: {e}")
         
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)
